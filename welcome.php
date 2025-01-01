@@ -209,7 +209,8 @@ $id= $_SESSION['u_id'];
 						<!-- Product 1 -->
 						<?php
 					
-					$sql1 = "SELECT * FROM `items`";
+					$sql1 = "SELECT * FROM `items` ORDER BY id DESC 
+LIMIT 5";
 					$stmt1 = $connection->prepare($sql1);
 					$stmt1->execute();
 					 $result = $stmt1->get_result();
@@ -228,7 +229,7 @@ $id= $_SESSION['u_id'];
 									<div class="product_price">$<?php echo $row['price'];?></div>
 								</div>
 							</div>
-							<div class="red_button add_to_cart_button"><a href="php/add-cart.php?id=<?php echo $row["id"];?>">add to cart</a></div>
+							
 						</div>
 						  <?php
 					}

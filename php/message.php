@@ -13,5 +13,9 @@ $sql4 = "INSERT INTO `messages` (`user-id`, `message`) VALUES (?,?);"; #add the 
 $stmt4 = $connection->prepare($sql4);
 $stmt4->bind_param("ss",$u_id,$message);
 $stmt4->execute();
+
+session_start();
+$_SESSION["message"] = "Message sent successfully";
 header('location: ../contact.php');
+
 ?>

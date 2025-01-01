@@ -4,7 +4,7 @@ include "php/connection.php";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Colo Shop</title>
+<title>Index</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Colo Shop Template">
@@ -71,7 +71,7 @@ include "php/connection.php";
 						<nav class="navbar">
 							<ul class="navbar_menu">
 								<li><a href="index.php">home</a></li>
-								<li><a href="login.php">shop</a></li>
+								<li><a href="shopp.php">shop</a></li>
 								<li><a href="login.php">contact</a></li>
 							</ul>
 							<ul class="navbar_user">
@@ -109,7 +109,7 @@ include "php/connection.php";
 					</ul>
 				</li>
 				<li class="menu_item"><a href="index.php">home</a></li>
-				<li class="menu_item"><a href="login.php">shop</a></li>
+				<li class="menu_item"><a href="shopp.php">shop</a></li>
 				<li class="menu_item"><a href="login.php">contact</a></li>
 			</ul>
 		</div>
@@ -124,7 +124,7 @@ include "php/connection.php";
 					<div class="main_slider_content">
 						<h6>Spring / Summer Collection 2025</h6>
 						<h1>Get up to 30% Off New Arrivals</h1>
-						<div class="red_button shop_now_button"><a href="login.php">shop now</a></div>
+						<div class="red_button shop_now_button"><a href="shopp.php">shop now</a></div>
 					</div>
 				</div>
 			</div>
@@ -139,21 +139,21 @@ include "php/connection.php";
 				<div class="col-md-4">
 					<div class="banner_item align-items-center" style="background-image:url(images/banner_1.jpg)">
 						<div class="banner_category">
-							<a href="login.php">women's</a>
+							<a href="shopp.php">women's</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="banner_item align-items-center" style="background-image:url(images/banner_2.jpg)">
 						<div class="banner_category">
-							<a href="login.php">accessories's</a>
+							<a href="shopp.php">accessories's</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="banner_item align-items-center" style="background-image:url(images/banner_3.jpg)">
 						<div class="banner_category">
-							<a href="login.php">men's</a>
+							<a href="shopp.php">men's</a>
 						</div>
 					</div>
 				</div>
@@ -191,7 +191,8 @@ include "php/connection.php";
 						<!-- Product 1 -->
 						<?php
 					
-					$sql1 = "SELECT * FROM `items`";
+					$sql1 = "SELECT * FROM `items` ORDER BY id DESC 
+LIMIT 5";
 					$stmt1 = $connection->prepare($sql1);
 					$stmt1->execute();
 					 $result = $stmt1->get_result();
@@ -206,7 +207,7 @@ include "php/connection.php";
 								</div>
 								<div class="favorite favorite_left"></div>
 								<div class="product_info">
-									<h6 class="product_name"><a href="login.php"><?php echo $row['name'];?></a></h6>
+									<h6 class="product_name"><a href="productt.php?id=<?php echo $row['id'];?>"><?php echo $row['name'];?></a></h6>
 									<div class="product_price">$<?php echo $row['price'];?></div>
 								</div>
 							</div>
@@ -254,7 +255,7 @@ include "php/connection.php";
 								<div class="timer_unit">Sec</div>
 							</li>
 						</ul>
-						<div class="red_button deal_ofthe_week_button"><a href="login.html">shop now</a></div>
+						<div class="red_button deal_ofthe_week_button"><a href="shopp.php">shop now</a></div>
 					</div>
 				</div>
 			</div>
@@ -307,13 +308,7 @@ include "php/connection.php";
 		</div>
 	</div>
 
-	<!-- Blogs -->
 
-	
-
-	<!-- Newsletter -->
-
-	
 
 	<!-- Footer -->
 
@@ -323,7 +318,7 @@ include "php/connection.php";
 				<div class="col-lg-6">
 					<div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
 						<ul class="footer_nav">
-							<li><a href="login.php">Shop</a></li>
+							<li><a href="shopp.php">Shop</a></li>
 							<li><a href="#">FAQs</a></li>
 							<li><a href="login.php">Contact us</a></li>
 						</ul>

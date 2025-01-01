@@ -219,7 +219,7 @@ session_start();
                                                     <label for="text-input" class=" form-control-label">Item ID</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="id" name="id"  class="form-control">
+                                                    <input type="text" id="id" name="id" placeholder="Enter Item ID" class="form-control" Required>
                                                    
                                                 </div>
                                             </div>
@@ -229,7 +229,7 @@ session_start();
                                                     <label for="text-input" class=" form-control-label">Item Name</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="name" name="name"  class="form-control">
+                                                    <input type="text" id="name" name="name" placeholder="Enter Item name" class="form-control" Required>
                                                    
                                                 </div>
                                             </div>
@@ -240,32 +240,47 @@ session_start();
                                                     <label for="textarea-input" class=" form-control-label">Item Description</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <textarea name="des" id="des" rows="9" placeholder="Description..." class="form-control"></textarea>
+                                                    <textarea name="des" id="des" rows="9" placeholder="Description..." class="form-control" Required></textarea>
                                                 </div>
                                             </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="select" class=" form-control-label">Size</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <select name="size" id="size" class="form-control">
-                                                        <option value="S">S</option>
-                                                        <option value="M">M</option>
-                                                        <option value="L">L</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                           
 
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="select" class=" form-control-label">Size</label>
+                                                    <label class=" form-control-label">Sizes</label>
+                                                </div>
+                                                <div class="col col-md-9">
+                                                    <div class="form-check">
+                                                        <div class="checkbox">
+                                                            <label for="checkbox1" class="form-check-label ">
+                                                                <input type="checkbox" id="checkbox1" name="options[]" value="S" class="form-check-input">S
+                                                            </label>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label for="checkbox2" class="form-check-label ">
+                                                                <input type="checkbox" id="checkbox2" name="options[]" value="M" class="form-check-input"> M
+                                                            </label>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label for="checkbox3" class="form-check-label ">
+                                                                <input type="checkbox" id="checkbox3" name="options[]" value="L" class="form-check-input"> L
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Category</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <select name="cat" id="cat" class="form-control">
                                                         
                                                         <option value="Women">Women</option>
                                                         <option value="Men">Men</option>
-                                                        <option value="Kids">Kids</option>
+                                                        <option value="accessories">accessories</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -275,7 +290,17 @@ session_start();
                                                     <label for="text-input" class=" form-control-label">Item Price</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="price" name="price"  class="form-control">
+                                                    <input type="text" id="price" name="price" placeholder="Enter Item price" class="form-control">
+                                                   
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Item Quantity</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="quantity" name="quantity" placeholder="Enter Item quantity" class="form-control">
                                                    
                                                 </div>
                                             </div>

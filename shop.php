@@ -9,7 +9,7 @@ if(empty($_SESSION['u_id'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Home</title>
+<title>Shop</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Colo Shop Template">
@@ -186,7 +186,7 @@ $id= $_SESSION['u_id'];
 									<div class="product_price">$<?php echo $row['price'];?></div>
 								</div>
 							</div>
-							<div class="red_button add_to_cart_button"><a href="php/add-cart.php?id=<?php echo $row["id"];?>#">add to cart</a></div>
+							
 						</div>
 						  <?php
 					}

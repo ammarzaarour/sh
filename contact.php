@@ -209,6 +209,24 @@ $id= $_SESSION['u_id'];
 						<div>
 							<button id="review_submit" type="submit" class="red_button message_submit_btn trans_300" value="Submit">send message</button>
 						</div>
+						<br>
+						
+						<?php
+					
+                                    if (!empty($_SESSION["message"])){
+                                    ?>
+                                    <div class="alert alert-success" role="alert">
+                                    <?php
+                                    $x = $_SESSION["message"];
+                                    echo $x;
+                                    $_SESSION["message"] = "";
+                                    
+                                
+                                    ?>
+                                    </div>
+                                    <?php
+                                    }
+                                    ?>
 					</form>
 				</div>
 			</div>

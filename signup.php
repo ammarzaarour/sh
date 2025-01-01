@@ -5,7 +5,7 @@ session_start();
 <html>
 
 <head>
-    <title>HTML Login Form</title>
+    <title>Signup</title>
     <link rel="stylesheet" 
           href="styles/style.css">
 </head>
@@ -73,7 +73,12 @@ session_start();
                 </button>
             </div>
         </form>
-      
+        <p>Registered? 
+              <a href="login.php" 
+               style="text-decoration: none;">
+                Login
+            </a>
+        </p>
     </div>
 </body>
 

@@ -5,7 +5,7 @@ session_start();
 <html>
 
 <head>
-    <title>HTML Login Form</title>
+    <title>Login</title>
     <link rel="stylesheet" 
           href="styles/style.css">
 </head>
@@ -15,7 +15,7 @@ session_start();
         <h1>ShaRay</h1>
         <h3>Enter your login credentials</h3>
         <?php
-					/* If email is already taken, print a danger alert that tells "email is already taken"*/
+					/* If email or pass is wrong */
                                     if (!empty($_SESSION["flash"])){
                                     ?>
                                     <div class="alert alert-danger" role="alert">

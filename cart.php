@@ -9,7 +9,7 @@ if(empty($_SESSION['u_id'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Colo Shop Categories</title>
+<title>Cart</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Colo Shop Template">
@@ -158,8 +158,8 @@ $id= $_SESSION['u_id'];
 
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li class="active"><a href="index.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Cart</a></li>
+						<li><a href="welcome.php">Home</a></li>
+						<li class="active"><a href="cart.php"><i class="fa fa-angle-right" aria-hidden="true"></i>Cart</a></li>
 					</ul>
 				</div>
 
@@ -172,25 +172,6 @@ $id= $_SESSION['u_id'];
 						</div>
 						
 					</div>
-
-				
-
-					<!-- Sizes -->
-					<div class="sidebar_section">
-						<div class="sidebar_title">
-							<h5>Sizes</h5>
-						</div>
-						<ul class="checkboxes">
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>S</span></li>
-							<li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>M</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>L</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>XL</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>XXL</span></li>
-						</ul>
-					</div>
-
-				
-
 				</div>
 
 				<!-- Main Content -->
@@ -213,7 +194,9 @@ $id= $_SESSION['u_id'];
 					$sql1 = "SELECT 
 					cart.id,
 					cart.userid, 
-					cart.quantity, 
+					cart.quantity,
+					cart.item_size,
+					items.id AS item_id, 
 					items.name, 
 					items.price,
 					items.image
@@ -241,8 +224,15 @@ $id= $_SESSION['u_id'];
 											
 										
 											<div class="product_info">
-												<h6 class="product_name"><a href="single.html"><?php echo $row['name'];?></a></h6>
+												<h6 class="product_name"><a href="product.php?id=<?php echo $row['item_id'];?>"><?php echo $row['name'];?> (<?php echo $row['quantity'];?> pieces)</a></h6>
 												<div class="product_price">$<?php echo $row['price'];?>.00</div>
+												<?php
+												if($row['item_size']!=""){
+												?>
+												<h5 class="product_name">size: <?php echo $row['item_size'];?></h5>
+												<?php
+					}
+				   ?>
 											</div>
 										</div>
 										<div class="red_button add_to_cart_button"><a href="php/delete-cart.php?c_id=<?php echo $row["id"];?>">Delete from cart</a></div>
@@ -256,7 +246,9 @@ $id= $_SESSION['u_id'];
 
 
 							</div>
+							<div class="red_button shop_now_button"><a href="proceed/proceed.html">Proceed</a></div>
 						</div>
+						
 					</div>
 				</div>
 			</div>

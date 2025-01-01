@@ -9,7 +9,7 @@ if(empty($_SESSION['u_id'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Single Product</title>
+<title>Product</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Colo Shop Template">
@@ -178,7 +178,7 @@ $id= $_SESSION['u_id'];
 					</div>
 				</div>
 			</div>
-			
+		
 			<div class="col-lg-5">
 				<div class="product_details">
 					<div class="product_details_title">
@@ -188,29 +188,60 @@ $id= $_SESSION['u_id'];
 					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
 						<span class="ti-truck"></span><span>free delivery</span>
 					</div>
+					<br>
 					<div class="product_price">$<?php echo $row['price'];?>.00</div>
 					
+					<?php
+                // Fetch available sizes
+                $sql = "SELECT size FROM item_sizes WHERE item_id = ?";
+                $stmt = $connection->prepare($sql);
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+				?>
+					<form action="php/add-cart.php?id=<?php echo $row['id'];?>" method="POST">
 					<div class="product_color">
-						<span>Select Color:</span>
-						<ul>
-							<li style="background: #e54e5d"></li>
-							<li style="background: #252525"></li>
-							<li style="background: #60b3f3"></li>
+					<?php
+					if ($result->num_rows > 0) {
+						?>
+
+						<span>Select Size:</span>
+						<?php
+                }
+                ?>
+
+						<ul >
+					
+				<?php
+                while ($sizeRow = $result->fetch_assoc()) {
+                    ?>
+							<li>
+							<input type="radio" name="selected_size" value="<?php echo $sizeRow['size']; ?>" required> 
+							<span><?php echo $sizeRow['size']; ?></span>
+							</li>
+							<?php
+                }
+                ?>
 						</ul>
 						
 					</div>
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 						<span>Quantity:</span>
 						<div class="quantity_selector">
-							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-							<span id="quantity_value">1</span>
-							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+							<i class="fa fa-minus" onclick="updateQuantity(-1)" aria-hidden="true"></i>
+							<span name="quantity_value" id="quantity_value">1</span>
+							<span class="plus" onclick="updateQuantity(1)"><i class="fa fa-plus" aria-hidden="true"></i></span>
 						</div>
-						<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+						<input type="hidden" name="quantity" id="hidden_quantity" value="1">
+						<button type="submit" class="red_button add_to_cart_button">Add to Cart</button>
+						
 					</div>
+			</form>
 				</div>
 			</div>
+			
+
+
 		</div>
 
 	</div>
@@ -300,6 +331,19 @@ $id= $_SESSION['u_id'];
 
 </div>
 
+<script>
+    function updateQuantity(change) {
+        let quantityElement = document.getElementById('quantity_value');
+        let hiddenInput = document.getElementById('hidden_quantity');
+        let currentQuantity = parseInt(quantityElement.textContent);
+
+        let newQuantity = currentQuantity + change;
+        if (newQuantity < 1) newQuantity = 1; // Prevent quantity less than 1
+
+        quantityElement.textContent = newQuantity;
+        hiddenInput.value = newQuantity;
+    }
+</script>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>

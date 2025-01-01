@@ -19,12 +19,6 @@ if(isset($_POST["des"]) && $_POST["des"] != "") {
     die ("Enter Product description");
 }
 
-if(isset($_POST["size"]) && $_POST["size"] != "") {
-    $size = $_POST["size"];
-}else{
-    die ("Enter product size");
-}
-
 if(isset($_POST["cat"]) && $_POST["cat"] != "") {
     $cat = $_POST["cat"];
 }else{
@@ -35,7 +29,11 @@ if(isset($_POST["price"]) && $_POST["price"] != "") {
 }else{
     die ("Enter Item price");
 }
-
+if(isset($_POST["quantity"]) && $_POST["quantity"] != "") {
+    $quantity = $_POST["quantity"];
+}else{
+    die ("Enter Item quantity");
+}
 
 
 
@@ -85,14 +83,23 @@ $stmt1->execute();
 $result = $stmt1->get_result();
 $row = $result->fetch_assoc();
 if(empty($row)){
-		$sql4 = "INSERT INTO `items` (`id`, `name`,`description`, `size`,`category`,`price`,`image`) VALUES (?,?,?,?,?,?,?);"; #add the new item to the database
+		$sql4 = "INSERT INTO `items` (`id`, `name`,`description`,`category`,`price`,`quantity`,`image`) VALUES (?,?,?,?,?,?,?);"; #add the new item to the database
 		$stmt4 = $connection->prepare($sql4);
-		$stmt4->bind_param("sssssss",$id,$name,$des,$size,$cat,$price,$new_img_name);
+		$stmt4->bind_param("sssssss",$id,$name,$des,$cat,$price,$quantity,$new_img_name);
 		$stmt4->execute();
-		header('location: ../add.php');
+
+		// Handle sizes as an array in a separate table
+		if(isset($_POST["options"]) && !empty($_POST["options"])) {
+			$sizes = $_POST["options"]; // Assuming size is an array from the form
 	
-
-
+			foreach($sizes as $size) {
+				$sql5 = "INSERT INTO `item_sizes` (`item_id`, `size`) VALUES (?, ?)";
+				$stmt5 = $connection->prepare($sql5);
+				$stmt5->bind_param("ss", $id, $size);
+				$stmt5->execute();
+			}
+		header('location: ../add.php');
+		}
 }
 else{
     session_start();
