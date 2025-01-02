@@ -75,7 +75,7 @@ include "php/connection.php";
 								<li><a href="login.php">contact</a></li>
 							</ul>
 							<ul class="navbar_user">
-								<li><a href="login.html"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+								<li><a href="login.php"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 								<li class="checkout">
 									<a href="login.php">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>

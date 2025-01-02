@@ -46,9 +46,7 @@ session_start();
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <img src="images/icon/logo.png" alt="CoolAdmin" />
-                        </a>
+                        <h1>SHaRay</h1>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
@@ -79,9 +77,7 @@ session_start();
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin"/>
-                </a>
+              <h1>SHaRay</h1>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
@@ -108,61 +104,30 @@ session_start();
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
+                                
                             </form>
                             <div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-comment-more"></i>
-                                        <span class="quantity">1</span>
+                                       
                                         <div class="mess-dropdown js-dropdown">
-                                            <div class="mess__title">
-                                                <p>You have 2 news message</p>
-                                            </div>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Michelle Moreno</h6>
-                                                    <p>Have sent a photo</p>
-                                                    <span class="time">3 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Diane Myers</h6>
-                                                    <p>You are now connected on message</p>
-                                                    <span class="time">Yesterday</span>
-                                                </div>
-                                            </div>
-                                            <div class="mess__footer">
-                                                <a href="#">View all messages</a>
-                                            </div>
+                                           
+                                          
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                        </div>
+                                        
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">Sharay Admin</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
-                                                    <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                                    </a>
+                                                  
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
@@ -173,7 +138,7 @@ session_start();
                                             </div>
                                             
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
+                                                <a href="php/logout.php">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>

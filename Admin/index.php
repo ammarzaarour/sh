@@ -46,7 +46,7 @@ session_start();
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
-                                <img src="images/icon/logo.png" alt="CoolAdmin">
+                            <h1>ShaRay</h1>
                             </a>
                         </div>
                         <div class="login-form">

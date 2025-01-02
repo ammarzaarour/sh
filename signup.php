@@ -47,24 +47,28 @@ session_start();
                    id="email"
                    name="email"
                    placeholder="Enter your Email" required>
+                   <label for="password">
+    Password:
+</label>
+<input type="password" 
+       id="password" 
+       name="password" 
+       data-validate="Password is required" 
+       placeholder="Enter your Password" 
+       required>
 
-            <label for="password">
-                  Password:
-              </label>
-            <input type="password"
-                   id="password" 
-                   name="password"
-                   data-validate = "Password is required"
-                   placeholder="Enter your Password" required>
+<label for="confirmpassword">
+    Confirm Password:
+</label>
+<input type="password" 
+       id="confirmpassword" 
+       name="confirmpassword" 
+       data-validate="Confirm is required" 
+       placeholder="Confirm your Password" 
+       required 
+       oninput="checkPasswords()">
 
-            <label for="confirmpassword">
-                   Confirm Password:
-                </label>
-              <input type="password"
-                     id="confirmpassword"
-                     name = "confirmpassword"
-                     data-validate = "Confirm is required"
-                     placeholder="Confirm your Password" required>
+<span id="passwordMatch" style="color: red;"></span>
 
             <div class="wrap">
                 <button type="submit"
@@ -82,4 +86,18 @@ session_start();
     </div>
 </body>
 
+<script>
+function checkPasswords() {
+  var password = document.getElementById("password").value;
+  var confirmPassword = document.getElementById("confirmpassword").value;
+  var message = document.getElementById("passwordMatch");
+
+  if (password != confirmPassword) {
+    message.style.display = "block";
+    message.textContent = "Passwords do not match!";
+  } else {
+    message.style.display = "none";
+  }
+}
+</script>
 </html>

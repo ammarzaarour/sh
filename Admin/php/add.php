@@ -100,6 +100,7 @@ if(empty($row)){
 			}
 		header('location: ../add.php');
 		}
+		header('location: ../add.php');
 }
 else{
     session_start();

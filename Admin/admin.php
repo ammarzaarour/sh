@@ -1,3 +1,11 @@
+<?php
+include "php/connection.php";
+session_start();
+if(empty($_SESSION['a_id'])){
+    header("Location: index.php");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,9 +50,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <img src="images/icon/logo.png" alt="CoolAdmin" />
-                        </a>
+                       <h1>SHaRay</h1>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
@@ -73,9 +79,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
-                </a>
+                <h1>SHaRay</h1>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
@@ -102,62 +106,28 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
+                                
                             </form>
                             <div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-comment-more"></i>
-                                        <span class="quantity">1</span>
+                                        
                                         <div class="mess-dropdown js-dropdown">
-                                            <div class="mess__title">
-                                                <p>You have 2 news message</p>
-                                            </div>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Michelle Moreno</h6>
-                                                    <p>Have sent a photo</p>
-                                                    <span class="time">3 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Diane Myers</h6>
-                                                    <p>You are now connected on message</p>
-                                                    <span class="time">Yesterday</span>
-                                                </div>
-                                            </div>
-                                            <div class="mess__footer">
-                                                <a href="#">View all messages</a>
-                                            </div>
+   
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                        </div>
+                                        
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">Sharay Admin</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
-                                                <div class="image">
-                                                    <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                                    </a>
-                                                </div>
+                                               
                                                 <div class="content">
                                                     <h5 class="name">
                                                         <a href="#">Sharay Admin</a>
@@ -167,7 +137,7 @@
                                             </div>
                                             
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
+                                                <a href="php/logout.php">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
@@ -200,8 +170,18 @@
                                                 <i class="zmdi zmdi-account-o"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>10368</h2>
-                                                <span>members online</span>
+                                            <?php
+                                                
+                                                // Prepare and execute the SQL query
+                                                $sql = "SELECT COUNT(*) as user_count FROM users"; 
+                                                $stmt = $connection->prepare($sql);
+                                                $stmt->execute();
+                                                $result = $stmt->get_result();
+                                                $row = $result->fetch_assoc();
+
+                                                ?>
+                                                <h2><?php echo $row['user_count'];?></h2>
+                                                <span>members </span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
@@ -218,8 +198,18 @@
                                                 <i class="zmdi zmdi-shopping-cart"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>388,688</h2>
-                                                <span>items solid</span>
+                                            <?php
+                                                
+                                                // Prepare and execute the SQL query
+                                                $sql = "SELECT COUNT(*) as items_count FROM items"; 
+                                                $stmt = $connection->prepare($sql);
+                                                $stmt->execute();
+                                                $result = $stmt->get_result();
+                                                $row = $result->fetch_assoc();
+
+                                                ?>
+                                                <h2><?php echo $row['items_count'];?></h2>
+                                                <span>items</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
@@ -228,6 +218,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php
+                                                
+                                                // Prepare and execute the SQL query
+                                                $sql = "SELECT COUNT(*) as cart_count FROM cart"; 
+                                                $stmt = $connection->prepare($sql);
+                                                $stmt->execute();
+                                                $result = $stmt->get_result();
+                                                $row = $result->fetch_assoc();
+
+                                                ?>
                             <div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c3">
                                     <div class="overview__inner">
@@ -236,8 +236,8 @@
                                                 <i class="zmdi zmdi-calendar-note"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>1,086</h2>
-                                                <span>this week</span>
+                                                <h2><?php echo $row['cart_count'];?></h2>
+                                                <span>products sold</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
@@ -246,16 +246,24 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php
+                                                
+                                                // Prepare and execute the SQL query
+                                                $sql = "SELECT COUNT(*) as mess_count FROM messages"; 
+                                                $stmt = $connection->prepare($sql);
+                                                $stmt->execute();
+                                                $result = $stmt->get_result();
+                                                $row = $result->fetch_assoc();
+
+                                                ?>
                             <div class="col-sm-6 col-lg-3">
                                 <div class="overview-item overview-item--c4">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div>
+                                            
                                             <div class="text">
-                                                <h2>$1,060,386</h2>
-                                                <span>total earnings</span>
+                                                <h2><?php echo $row['mess_count'];?></h2>
+                                                <span>message from users</span>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
@@ -268,32 +276,106 @@
                        
                         <div class="row">
                          
-                                <h2 class="title-1 m-b-25">Earnings By Items</h2>
+                                <h2 class="title-1 m-b-25">Users Cart</h2>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                             <tr>
-                                                <th>date</th>
-                                                <th>order ID</th>
-                                                <th>name</th>
-                                                <th class="text-right">price</th>
-                                                <th class="text-right">quantity</th>
-                                                <th class="text-right">total</th>
+                                                <th>User name</th>
+                                                <th>Product</th>
+                                                <th>Quantity</th>
+                                                <th class="text-right">Size</th>
+                                                <th class="text-right">Price</th>
+                                                <th class="text-right">Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <?php
+					
+					$sql1 = "SELECT 
+                                c.id, 
+                                c.quantity, 
+                                c.item_size, 
+                                u.name, 
+                                p.name AS product_name, 
+                                c.price 
+                            FROM 
+                                cart c
+                            JOIN 
+                                users u ON c.userid = u.id
+                            JOIN 
+                                items p ON c.productid = p.id
+                            ORDER BY 
+                                c.userid;";
+					$stmt1 = $connection->prepare($sql1);
+					$stmt1->execute();
+					 $result = $stmt1->get_result();
+					 while($row = $result->fetch_assoc()) {
+						 
+						
+						 ?>
                                             <tr>
-                                                <td>2018-09-29 05:57</td>
-                                                <td>100398</td>
-                                                <td>iPhone X 64Gb Grey</td>
-                                                <td class="text-right">$999.00</td>
-                                                <td class="text-right">1</td>
-                                                <td class="text-right">$999.00</td>
+                                                <td><?php echo $row['name'];?></td>
+                                                <td><?php echo $row['product_name'];?></td>
+                                                <td><?php echo $row['quantity'];?></td>
+                                                <td class="text-right"><?php echo $row['item_size'];?></td>
+                                                <td class="text-right">$<?php echo $row['price'];?>.00</td>
+                                                <td class="text-right"><a href="php/delete-cart.php?c_id=<?php echo $row["id"];?>">Delete</a></td>
                                             </tr>
+
+                                            <?php
+					}
+				   ?>
                                         </tbody>
                                     </table>
                                 </div>
                         </div>
+
+
+
+                        <div class="row">
+                         
+                         <h2 class="title-1 m-b-25">Our items</h2>
+                         <div class="table-responsive table--no-card m-b-40">
+                             <table class="table table-borderless table-striped table-earning">
+                                 <thead>
+                                     <tr>
+                                         <th>ID</th>
+                                         <th>Name</th>
+                                         <th>Category</th>
+                                         <th class="text-right">Price</th>
+                                         <th class="text-right">Quantity</th>
+                                         <th class="text-right">Delete</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                 <?php
+             
+             $sql1 = "SELECT * from items";
+             $stmt1 = $connection->prepare($sql1);
+             $stmt1->execute();
+              $result = $stmt1->get_result();
+              while($row = $result->fetch_assoc()) {
+                  
+                 
+                  ?>
+                                     <tr>
+                                         <td><?php echo $row['id'];?></td>
+                                         <td><?php echo $row['name'];?></td>
+                                         <td><?php echo $row['category'];?></td>
+                                         <td class="text-right">$<?php echo $row['price'];?>.00</td>
+                                         <td class="text-right"><?php echo $row['quantity'];?></td>
+                                         <td class="text-right"><a href="php/delete-item.php?i_id=<?php echo $row["id"];?>">Delete</a></td>
+                                     </tr>
+
+                                     <?php
+             }
+            ?>
+                                 </tbody>
+                             </table>
+                         </div>
+                 </div>
+
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
@@ -301,188 +383,59 @@
                                         <div class="bg-overlay bg-overlay--blue"></div>
                                         <h3>
                                             <i class="zmdi zmdi-comment-text"></i>New Messages</h3>
-                                        <button class="au-btn-plus">
-                                            <i class="zmdi zmdi-plus"></i>
-                                        </button>
+                                       
                                     </div>
                                     <div class="au-inbox-wrap js-inbox-wrap">
                                         <div class="au-message js-list-load">
-                                            <div class="au-message__noti">
-                                                <p>You Have
-                                                    <span>2</span>
+                                            
+                                        <?php
+             
+             $sql1 = "SELECT 
+                    m.message,  
+                    u.email
+                FROM 
+                    messages m
+                JOIN 
+                    users u ON m.userid = u.id;";
+             $stmt1 = $connection->prepare($sql1);
+             $stmt1->execute();
+              $result = $stmt1->get_result();
+              while($row = $result->fetch_assoc()) {
+                  
+                 
+                  ?>
+                                                <div class="au-message__item unread">
+                                                    <div class="au-message__item-inner">
+                                                        <div class="au-message__item-text">
+                                                            
+                                                            <div class="text">
+                                                                <h5 class="name"><?php echo $row['email'];?></h5>
+                                                                <p><?php echo $row['message'];?></p>
+                                                            </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
 
-                                                    new messages
-                                                </p>
+                                                <?php
+             }
+            ?>
+                                                
+                                              
                                             </div>
-                                            <div class="au-message-list">
-                                                <div class="au-message__item unread">
-                                                    <div class="au-message__item-inner">
-                                                        <div class="au-message__item-text">
-                                                            <div class="avatar-wrap">
-                                                                <div class="avatar">
-                                                                    <img src="images/icon/avatar-02.jpg" alt="John Smith">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h5 class="name">John Smith</h5>
-                                                                <p>Have sent a photo</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-message__item-time">
-                                                            <span>12 Min ago</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="au-message__item unread">
-                                                    <div class="au-message__item-inner">
-                                                        <div class="au-message__item-text">
-                                                            <div class="avatar-wrap online">
-                                                                <div class="avatar">
-                                                                    <img src="images/icon/avatar-03.jpg" alt="Nicholas Martinez">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h5 class="name">Nicholas Martinez</h5>
-                                                                <p>You are now connected on message</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-message__item-time">
-                                                            <span>11:00 PM</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="au-message__item">
-                                                    <div class="au-message__item-inner">
-                                                        <div class="au-message__item-text">
-                                                            <div class="avatar-wrap online">
-                                                                <div class="avatar">
-                                                                    <img src="images/icon/avatar-04.jpg" alt="Michelle Sims">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h5 class="name">Michelle Sims</h5>
-                                                                <p>Lorem ipsum dolor sit amet</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-message__item-time">
-                                                            <span>Yesterday</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="au-message__item">
-                                                    <div class="au-message__item-inner">
-                                                        <div class="au-message__item-text">
-                                                            <div class="avatar-wrap">
-                                                                <div class="avatar">
-                                                                    <img src="images/icon/avatar-05.jpg" alt="Michelle Sims">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h5 class="name">Michelle Sims</h5>
-                                                                <p>Purus feugiat finibus</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-message__item-time">
-                                                            <span>Sunday</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="au-message__item js-load-item">
-                                                    <div class="au-message__item-inner">
-                                                        <div class="au-message__item-text">
-                                                            <div class="avatar-wrap online">
-                                                                <div class="avatar">
-                                                                    <img src="images/icon/avatar-04.jpg" alt="Michelle Sims">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h5 class="name">Michelle Sims</h5>
-                                                                <p>Lorem ipsum dolor sit amet</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-message__item-time">
-                                                            <span>Yesterday</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="au-message__item js-load-item">
-                                                    <div class="au-message__item-inner">
-                                                        <div class="au-message__item-text">
-                                                            <div class="avatar-wrap">
-                                                                <div class="avatar">
-                                                                    <img src="images/icon/avatar-05.jpg" alt="Michelle Sims">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h5 class="name">Michelle Sims</h5>
-                                                                <p>Purus feugiat finibus</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-message__item-time">
-                                                            <span>Sunday</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="au-message__footer">
-                                                <button class="au-btn au-btn-load js-load-btn">load more</button>
-                                            </div>
+                                           
                                         </div>
-                                        <div class="au-chat">
-                                            <div class="au-chat__title">
-                                                <div class="au-chat-info">
-                                                    <div class="avatar-wrap online">
-                                                        <div class="avatar avatar--small">
-                                                            <img src="images/icon/avatar-02.jpg" alt="John Smith">
-                                                        </div>
-                                                    </div>
-                                                    <span class="nick">
-                                                        <a href="#">John Smith</a>
-                                                    </span>
-                                                </div>
+                                       
+                                            
+                                              
                                             </div>
-                                            <div class="au-chat__content">
-                                                <div class="recei-mess-wrap">
-                                                    <span class="mess-time">12 Min ago</span>
-                                                    <div class="recei-mess__inner">
-                                                        <div class="avatar avatar--tiny">
-                                                            <img src="images/icon/avatar-02.jpg" alt="John Smith">
-                                                        </div>
-                                                        <div class="recei-mess-list">
-                                                            <div class="recei-mess">Lorem ipsum dolor sit amet, consectetur adipiscing elit non iaculis</div>
-                                                            <div class="recei-mess">Donec tempor, sapien ac viverra</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="send-mess-wrap">
-                                                    <span class="mess-time">30 Sec ago</span>
-                                                    <div class="send-mess__inner">
-                                                        <div class="send-mess-list">
-                                                            <div class="send-mess">Lorem ipsum dolor sit amet, consectetur adipiscing elit non iaculis</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="au-chat-textfield">
-                                                <form class="au-form-icon">
-                                                    <input class="au-input au-input--full au-input--h65" type="text" placeholder="Type a message">
-                                                    <button class="au-input-icon">
-                                                        <i class="zmdi zmdi-camera"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

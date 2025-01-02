@@ -196,9 +196,9 @@ $id= $_SESSION['u_id'];
 					cart.userid, 
 					cart.quantity,
 					cart.item_size,
+					cart.price,
 					items.id AS item_id, 
 					items.name, 
-					items.price,
 					items.image
 				FROM 
 					cart 
@@ -245,8 +245,28 @@ $id= $_SESSION['u_id'];
 
 
 
+<?php
+					
+					$sql1 = "SELECT SUM(price) as total_price 
+        FROM cart 
+        WHERE userid = ?";
+					$stmt1 = $connection->prepare($sql1);
+					$stmt1->bind_param("s", $_SESSION['u_id']); // Bind the session variable
+					$stmt1->execute();
+					$result = $stmt1->get_result();
+					$row = $result->fetch_assoc();
+						 
+						
+						 ?>
+
 							</div>
-							<div class="red_button shop_now_button"><a href="proceed/proceed.html">Proceed</a></div>
+							<?php
+							if ($row['total_price'] !="") {
+								?>
+							<div class="red_button shop_now_button"><a href="proceed/proceed.html">Total: $<?php echo $row['total_price'];?>.00</a></div>
+							<?php
+					}
+				   ?>
 						</div>
 						
 					</div>
