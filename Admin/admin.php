@@ -2,7 +2,7 @@
 include "php/connection.php";
 session_start();
 if(empty($_SESSION['a_id'])){
-    header("Location: index.php");
+    header("Location: ../index.php");
     die();
 }
 ?>
@@ -345,6 +345,7 @@ if(empty($_SESSION['a_id'])){
                                          <th>Category</th>
                                          <th class="text-right">Price</th>
                                          <th class="text-right">Quantity</th>
+                                         <th class="text-right">Edit</th>
                                          <th class="text-right">Delete</th>
                                      </tr>
                                  </thead>
@@ -365,6 +366,7 @@ if(empty($_SESSION['a_id'])){
                                          <td><?php echo $row['category'];?></td>
                                          <td class="text-right">$<?php echo $row['price'];?>.00</td>
                                          <td class="text-right"><?php echo $row['quantity'];?></td>
+                                         <td class="text-right"><a href="edit.php?i_id=<?php echo $row["id"];?>">Edit</a></td>
                                          <td class="text-right"><a href="php/delete-item.php?i_id=<?php echo $row["id"];?>">Delete</a></td>
                                      </tr>
 

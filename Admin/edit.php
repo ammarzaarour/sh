@@ -18,7 +18,7 @@ if(empty($_SESSION['a_id'])){
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Add Items</title>
+    <title>Edit Item</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -154,6 +154,16 @@ if(empty($_SESSION['a_id'])){
                 </div>
             </header>
             <!-- MAIN CONTENT-->
+            <?php
+                                            $i_id=$_GET['i_id'];
+                                            $sql1 = "Select * from items where id=$i_id";
+                                            
+                                            $stmt1 = $connection->prepare($sql1);
+                                            $stmt1->execute();
+                                            $result = $stmt1->get_result();
+                                            $row = $result->fetch_assoc();
+						 
+					                	 ?>
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
@@ -163,10 +173,10 @@ if(empty($_SESSION['a_id'])){
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <strong>Add Item</strong>
+                                        <strong>Edit Item</strong>
                                     </div>
                                     <div class="card-body card-block">
-                                        <form action="php/add.php" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                        <form action="php/edit.php?id=<?php echo $row['id'];?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                                         <?php
 					/* If ID is already taken, print a danger alert that tells "ID is already taken"*/
                                     if (!empty($_SESSION["add-flash"])){
@@ -188,7 +198,7 @@ if(empty($_SESSION['a_id'])){
                                                     <label for="text-input" class=" form-control-label">Item ID</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="id" name="id" placeholder="Enter Item ID" class="form-control" Required>
+                                                    <input type="text" id="id" name="id" value="<?php echo $row['id'];?>" placeholder="Enter Item ID" class="form-control" Required>
                                                    
                                                 </div>
                                             </div>
@@ -198,7 +208,7 @@ if(empty($_SESSION['a_id'])){
                                                     <label for="text-input" class=" form-control-label">Item Name</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="name" name="name" placeholder="Enter Item name" class="form-control" Required>
+                                                    <input type="text" id="name" name="name"  value="<?php echo $row['name'];?>" placeholder="Enter Item name" class="form-control" Required>
                                                    
                                                 </div>
                                             </div>
@@ -209,57 +219,21 @@ if(empty($_SESSION['a_id'])){
                                                     <label for="textarea-input" class=" form-control-label">Item Description</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <textarea name="des" id="des" rows="9" placeholder="Description..." class="form-control" Required></textarea>
+                                                    <textarea name="des" id="des" rows="9" placeholder="Description..." class="form-control" Required><?php echo $row['description'];?></textarea>
                                                 </div>
                                             </div>
                                            
 
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label class=" form-control-label">Sizes</label>
-                                                </div>
-                                                <div class="col col-md-9">
-                                                    <div class="form-check">
-                                                        <div class="checkbox">
-                                                            <label for="checkbox1" class="form-check-label ">
-                                                                <input type="checkbox" id="checkbox1" name="options[]" value="S" class="form-check-input">S
-                                                            </label>
-                                                        </div>
-                                                        <div class="checkbox">
-                                                            <label for="checkbox2" class="form-check-label ">
-                                                                <input type="checkbox" id="checkbox2" name="options[]" value="M" class="form-check-input"> M
-                                                            </label>
-                                                        </div>
-                                                        <div class="checkbox">
-                                                            <label for="checkbox3" class="form-check-label ">
-                                                                <input type="checkbox" id="checkbox3" name="options[]" value="L" class="form-check-input"> L
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
 
 
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="select" class=" form-control-label">Category</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <select name="cat" id="cat" class="form-control">
-                                                        
-                                                        <option value="Women">Women</option>
-                                                        <option value="Men">Men</option>
-                                                        <option value="accessories">accessories</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                           
 
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
                                                     <label for="text-input" class=" form-control-label">Item Price</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="price" name="price" placeholder="Enter Item price" class="form-control">
+                                                    <input type="text" id="price" name="price" value="<?php echo $row['price'];?>" placeholder="Enter Item price" class="form-control">
                                                    
                                                 </div>
                                             </div>
@@ -269,21 +243,14 @@ if(empty($_SESSION['a_id'])){
                                                     <label for="text-input" class=" form-control-label">Item Quantity</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="quantity" name="quantity" placeholder="Enter Item quantity" class="form-control">
+                                                    <input type="text" id="quantity" name="quantity" value="<?php echo $row['quantity'];?>" placeholder="Enter Item quantity" class="form-control">
                                                    
                                                 </div>
                                             </div>
                                             
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="file-input" class=" form-control-label">Upload Image</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="file" id="my_image" name="my_image" class="form-control-file">
-                                                </div>
-                                            </div>
+                                           
                                             <button type="submit" class="btn btn-primary btn-sm">
-                                                <i class="fa"></i> Add
+                                                <i class="fa"></i> Edit
                                             </button>
                                         </form>
                                     </div>

@@ -29,6 +29,8 @@
 	 else {
 		die("passwords didn't match");
 	 }
+	 $role = "user";
+	 $hash = hash('sha256', $password);
 	 $sql1="Select * from users where email=?"; #Check if the email already exists in the database
 	 $stmt1 = $connection->prepare($sql1);
 	 $stmt1->bind_param("s",$email);
@@ -36,8 +38,8 @@
 	 $result = $stmt1->get_result();
 	 $row = $result->fetch_assoc();
 	 if(empty($row)){
-		$x = $connection->prepare("INSERT INTO users (name,email, password) VALUES (?, ?, ?)");
-	$x->bind_param("sss",$name, $email, $password);
+		$x = $connection->prepare("INSERT INTO users (name,email, password,role) VALUES (?, ?, ?,?)");
+	$x->bind_param("ssss",$name, $email, $hash,$role);
 	$x->execute();
 	
 	$x->close();
